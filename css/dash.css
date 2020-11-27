@@ -2,3 +2,10 @@
     background-color: rgb(34, 34, 34) !important;
     color: white;
 }
+
+table tbody .detail {
+    width: 40%;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

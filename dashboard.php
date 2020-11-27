@@ -1,9 +1,22 @@
 <?php
-
+    session_start();
     include_once("function/koneksi.php");
+    include_once("function/helper.php");
 
-    $page = isset($_GET['page']) ? $_GET['page'] : false;
+    $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : false;
+	$nama = isset($_SESSION['nama']) ? $_SESSION['nama'] : false;
+	$level = isset($_SESSION['level']) ? $_SESSION['level'] : false;
 
+    if($id_user && $level == "admin"){
+		$page = isset($_GET['page']) ? $_GET['page'] : false;
+        $action = isset($_GET['action']) ? $_GET['action'] : false;
+	}
+    else if($id_user && $level != "admin"){
+		header("location: checkorder.php");
+    }
+    else{
+		header("location: form-code.php");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +34,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image" href="img/Lambang ITS putih-05.png">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -43,7 +57,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="store.php">
                 <div class="sidebar-brand-icon">
-                    <img src="img/Lambang ITS putih-05.png" style="width: 70px;">
+                    <img class="mr-2" src="img/Lambang ITS putih-05.png" style="width: 40px;">
                 </div>
                 <div class="sidebar-brand-text">BEM ITS</div>
             </a>
@@ -66,25 +80,25 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php?page=users">
+                <a class="nav-link" href="dashboard.php?page=users&action=li">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Users</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php?page=items">
+                <a class="nav-link" href="dashboard.php?page=items&action=li">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Items</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php?page=category">
+                <a class="nav-link" href="dashboard.php?page=category&action=li">
                     <i class="fas fa-fw fa-boxes"></i>
                     <span>Category</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php?page=order">
+                <a class="nav-link" href="dashboard.php?page=order&action=li">
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Order</span></a>
             </li>
@@ -119,20 +133,6 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-dark" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -315,7 +315,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <?php
-                        $filename = "li_$page.php";
+                        $filename = "$action-$page.php";
                         
                         if(file_exists($filename)){
                             include_once($filename);
@@ -350,26 +350,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-dark" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -393,6 +373,25 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <?php
+    if(isset($_SESSION['status']) && $_SESSION['status'] !=''){
+    ?>
+
+    <script>
+    swal({
+        title: "<?php echo $_SESSION['status']; ?>",
+        icon: "<?php echo $_SESSION['status_code']; ?>",
+        button: "Aww yiss!",
+    });
+    </script>
+
+    <?php
+        unset($_SESSION['status']);
+        unset($_SESSION['status_code']);
+    }
+    ?>
 </body>
 
 </html>

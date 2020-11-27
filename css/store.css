@@ -1,0 +1,145 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* NAVBAR */
+
+.header {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #000000;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 50px;
+}
+
+.store-button {
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 !important;
+    padding: 1px 6px !important;
+}
+
+.store-button a {
+    color: #000000;
+    padding: 7px 0;
+}
+
+.store-button img {
+    width: 20px;
+}
+
+/* SLIDE */
+.layer-slick1 .ltext-104 {
+    font-size: 50px;
+}
+
+/* UP */
+.tab-up .content {
+    max-height: 260px;
+    width: auto;
+}
+
+.tab-up .content .col-6 {
+    height: 260px;
+    background-clip: content-box;
+}
+
+.tab-up .content .col-6 .row {
+    height: 260px;
+}
+
+.tab-up .content .col-6 .row .col img {
+    max-width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.tab-up .content .col-3 {
+    height: 260px;
+}
+
+.tab-up .content .col-3 .block2-pic {
+    height: 100%;
+}
+
+.tab-up .content .col-3 .block2-pic img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tab-up .col img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ITEMS */
+#frame-barang .dis-item .block2-pic {
+    height: 300px;
+}
+
+#frame-barang .dis-item img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1199px) {
+    .tab-blog {
+        height: auto;
+    }
+
+    .tab-store {
+        height: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .banner {
+        padding: 300px 0;
+    }
+
+    .tab-us {
+        height: auto;
+    }
+
+    .tab-us .row {
+        justify-content: center !important;
+    }
+
+    .tab-blog {
+        height: auto;
+    }
+
+    .col-md-10 {
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        padding: 230px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner {
+        padding: 200px 0;
+    }
+
+    .btn-banner .btn {
+        margin-top: 10px;
+    }
+}

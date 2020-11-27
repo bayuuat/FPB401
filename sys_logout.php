@@ -6,6 +6,6 @@
 	unset($_SESSION['nama']);
 	unset($_SESSION['level']);
 	
-	header("location: store.php");
+	header("location: form-code.php");
 
 ?>
